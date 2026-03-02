@@ -813,10 +813,10 @@
 
       <!-- Summary card -->
       <article class="summary-card" id="summaryCard">
-        <div class="summary-title">Invoice summary</div>
+        <div class="summary-title">Booking summary</div>
         <div id="summaryContent">
           <p class="summary-empty">
-            Buuxi foomka bidix si dulmar invoice u muuqdo halkan.
+            Buuxi foomka bidix si dulmar Booking u muuqdo halkan.
           </p>
         </div>
       </article>
@@ -867,7 +867,7 @@
 
     function buildSummary(data) {
       if (!data.fullName && !data.date && !data.qty && !data.totalAmount && !data.paid && !data.reset && !data.district && !data.phone) {
-        return '<p class="summary-empty">Buuxi foomka bidix si dulmar invoice u muuqdo halkan.</p>';
+        return '<p class="summary-empty">Buuxi foomka bidix si dulmar Booking u muuqdo halkan.</p>';
       }
 
       return `
@@ -966,7 +966,7 @@
       const data = collectFormData();
 
       try {
-        await addDoc(collection(db, "invoices"), {
+        await addDoc(collection(db, "Bookings"), {
           ...data,
           createdAt: serverTimestamp()
         });
@@ -975,10 +975,10 @@
         form.reset();
         const cleared = collectFormData();
         summaryContent.innerHTML = buildSummary(cleared);
-        successMsg.textContent = "Booking/Invoice waa la keydiyay (Firebase).";
+        successMsg.textContent = "Booking/Booking waa la keydiyay (Firebase).";
         successMsg.classList.add("visible");
       } catch (err) {
-        console.error("Error saving invoice to Firestore", err);
+        console.error("Error saving Booking to Firestore", err);
         successMsg.textContent = "Save ma shaqeyn (Firebase).";
         successMsg.classList.add("visible");
       }
@@ -1032,6 +1032,7 @@
   </script>
 </body>
 </html>
+
 
 
 
