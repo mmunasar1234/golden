@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="so">
+
 <head>
   <meta charset="UTF-8" />
   <title>Golden Coffee and Halls - Booking</title>
@@ -28,22 +29,15 @@
       width: 100%;
       border-radius: 20px;
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7);
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      position: relative;
       overflow: hidden;
       border: 1px solid rgba(212, 166, 63, 0.35);
-    }
-
-    @media (max-width: 820px) {
-      .booking-wrapper {
-        grid-template-columns: 1fr;
-      }
     }
 
     /* LEFT SIDE - FORM */
 
     .booking-form {
-      padding: 28px 32px 32px;
+      padding: 28px 32px 120px;
       background: radial-gradient(circle at top left, #33270f 0%, #181309 55%);
     }
 
@@ -88,6 +82,7 @@
     }
 
     .title {
+      text-align: center;
       margin: 6px 0 18px;
       font-size: 1.1rem;
       letter-spacing: 0.15em;
@@ -221,20 +216,20 @@
       transition: opacity 0.15s ease;
     }
 
-    .radio-pill input:checked + span.bullet::after {
+    .radio-pill input:checked+span.bullet::after {
       opacity: 1;
     }
 
-    .radio-pill input:checked ~ span.text {
+    .radio-pill input:checked~span.text {
       color: #1a1208;
     }
 
-    .radio-pill input:checked ~ span.bullet {
+    .radio-pill input:checked~span.bullet {
       background: #f3c45c;
       border-color: #f3c45c;
     }
 
-    .radio-pill input:checked ~ span.text-pill-bg {
+    .radio-pill input:checked~span.text-pill-bg {
       position: absolute;
       inset: -1px;
       border-radius: 999px;
@@ -336,7 +331,6 @@
     .bookings-title {
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      text-aling: center;
       font-size: 0.72rem;
       color: #7b5218;
     }
@@ -456,8 +450,8 @@
       gap: 26px;
     }
 
- 
-   
+
+
     /* GOLDEN STAMP */
 
     .golden-stamp {
@@ -596,7 +590,8 @@
         margin: 8mm;
       }
 
-      html, body {
+      html,
+      body {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         height: auto !important;
@@ -611,9 +606,11 @@
       .actions {
         display: none !important;
       }
+
       body {
         background: #ffffff !important;
       }
+
       .booking-wrapper {
         box-shadow: none !important;
         border: none !important;
@@ -622,6 +619,7 @@
         max-width: 100% !important;
         width: 100% !important;
       }
+
       .booking-form,
       .booking-side {
         page-break-inside: avoid !important;
@@ -643,7 +641,7 @@
         print-color-adjust: exact !important;
       }
 
-      
+
 
       .golden-stamp {
         background: radial-gradient(circle at 30% 20%, #fffadd 0%, #f7d973 30%, #c88b22 60%, #7e5414 100%) !important;
@@ -662,10 +660,12 @@
         break-inside: avoid !important;
         page-break-inside: avoid !important;
       }
+
       .stamp-inner {
         display: flex !important;
         visibility: visible !important;
       }
+
       .stamp-inner img {
         visibility: visible !important;
         opacity: 1 !important;
@@ -681,44 +681,54 @@
       @page {
         margin: 6mm;
       }
+
       .booking-wrapper {
         padding: 0 !important;
       }
+
       .booking-form {
         padding: 16px 20px 20px !important;
       }
+
       .booking-side {
         padding: 16px 20px 24px !important;
       }
+
       .brand-text h1 {
         font-size: 1.1rem !important;
       }
+
       .title {
-        text-aling: center;
         font-size: 0.95rem !important;
         margin-bottom: 12px !important;
       }
+
       form {
         gap: 10px 14px !important;
       }
+
       .summary-card {
         padding: 10px 12px !important;
         font-size: 0.75rem !important;
       }
+
       .golden-stamp {
         width: 96px !important;
         height: 96px !important;
       }
+
       .stamp-inner {
         width: 58px !important;
         height: 58px !important;
       }
+
       .stamp-inner img {
         max-width: 52px !important;
       }
     }
   </style>
 </head>
+
 <body>
   <div class="booking-wrapper">
     <!-- LEFT / FORM -->
@@ -734,7 +744,7 @@
       </header>
 
       <h2 class="title">Booking</h2>
-     
+
 
       <form id="bookingForm" autocomplete="off">
         <div class="field">
@@ -758,7 +768,7 @@
         </div>
 
         <div class="field">
-          <label for="qty">Qty</label>
+          <label for="qty">No Of People</label>
           <input id="qty" name="qty" type="number" min="1" placeholder="Tusaale: 2" required />
         </div>
 
@@ -769,7 +779,8 @@
 
         <div class="field field-full">
           <label for="totalAmount">Total amount</label>
-          <input id="totalAmount" name="totalAmount" type="number" min="0" step="0.01" placeholder="Si toos ah" readonly />
+          <input id="totalAmount" name="totalAmount" type="number" min="0" step="0.01" placeholder="Si toos ah"
+            readonly />
         </div>
 
         <div class="field">
@@ -787,44 +798,36 @@
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
           <button class="btn-primary" type="button" id="submitBtn">
             <span class="icon">✶</span>
-            <span>Confirm Booking</span>
+            <span>Save</span>
           </button>
-          <button class="btn-primary" type="button" id="printBtn" style="background:linear-gradient(135deg,#f1f5ff,#c0d0ff);color:#1e293b;">
+          <button class="btn-primary" type="button" id="printBtn"
+            style="background:linear-gradient(135deg,#f1f5ff,#c0d0ff);color:#1e293b;">
             <span>Print / PDF</span>
           </button>
-          <button class="btn-primary" type="button" id="resetAllBtn" style="background:transparent;border:1px solid rgba(246,214,112,0.7);color:#f6d670;box-shadow:none;">
+          <button class="btn-primary" type="button" id="resetAllBtn"
+            style="background:transparent;border:1px solid rgba(246,214,112,0.7);color:#f6d670;box-shadow:none;">
             <span>Reset All</span>
           </button>
         </div>
-       
+
       </div>
 
       <p id="successMsg" class="success">
-        Booking‑ga waa la diiwaan geliyay (browser‑ka oo kaliya). Waxaad arki kartaa dulmar dhinaca midig.
+        Marka aad Save riixdo, xogta booking‑ga waxaa lagu keydiyaa browser‑kaaga (Local Storage) waana lagu daabici
+        karaa.
       </p>
     </section>
 
     <!-- RIGHT / STAMP + SUMMARY -->
     <section class="booking-side">
       <div class="side-header">
-        <h2>Golden Coffee and Halls</h2>
-        <p>Premium events • Signature coffee • Mogadishu</p>
       </div>
 
-      <!-- Summary card -->
-      <article class="summary-card" id="summaryCard">
-        <div class="summary-title">Booking summary</div>
-        <div id="summaryContent">
-          <p class="summary-empty">
-            Buuxi foomka bidix si dulmar Booking u muuqdo halkan.
-          </p>
-        </div>
-      </article>
 
       <!-- Signature + Stamp -->
       <div class="signature-area">
         <div class="signature-line">
-          
+
         </div>
 
         <div class="golden-stamp">
@@ -853,21 +856,20 @@
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDcWvwmC9aNQ6ey4I0rNsMNI6sk8SLnQY0",
-      authDomain: "golden-fe9ce.firebaseapp.com",
-      projectId: "golden-fe9ce",
-      storageBucket: "golden-fe9ce.firebasestorage.app",
-      messagingSenderId: "801196467125",
-      appId: "1:801196467125:web:3c1c1fb33404eb5a0f6ffc",
-      measurementId: "G-N9F1GFPYGZ"
+      apiKey: "AIzaSyDEB1T64qtyghRtO2pj2pItnf4xGIrMX_I",
+      authDomain: "goldenn-ee3de.firebaseapp.com",
+      projectId: "goldenn-ee3de",
+      storageBucket: "goldenn-ee3de.firebasestorage.app",
+      messagingSenderId: "865080468570",
+      appId: "1:865080468570:web:3d0ef91c88f91913eca463",
+      measurementId: "G-LDB1S4J5MN"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-
     function buildSummary(data) {
       if (!data.fullName && !data.date && !data.qty && !data.totalAmount && !data.paid && !data.reset && !data.district && !data.phone) {
-        return '<p class="summary-empty">Buuxi foomka bidix si dulmar Booking u muuqdo halkan.</p>';
+        return '<p class="summary-empty">Buuxi foomka bidix si dulmar invoice u muuqdo halkan.</p>';
       }
 
       return `
@@ -888,7 +890,7 @@
           <span class="summary-value">${data.date || "-"}</span>
         </div>
         <div class="summary-row">
-          <span class="summary-label">Qty</span>
+          <span class="summary-label">No Of People</span>
           <span class="summary-value">${data.qty || "-"}</span>
         </div>
         <div class="summary-row">
@@ -964,22 +966,48 @@
       if (!form.reportValidity()) return;
 
       const data = collectFormData();
+      const createdAtISO = new Date().toISOString();
 
       try {
-        await addDoc(collection(db, "Bookings"), {
-          ...data,
-          createdAt: serverTimestamp()
-        });
+        // 1. LOCAL STORAGE SAVE
+        let existingInvoices = [];
+        const stored = localStorage.getItem("golden_invoices");
+        if (stored) {
+          existingInvoices = JSON.parse(stored);
+        }
 
-        // nadiifi foomka + summary marka Firebase save-gu uu guuleysto
+        const newInvoice = {
+          ...data,
+          createdAt: createdAtISO
+        };
+        existingInvoices.push(newInvoice);
+        localStorage.setItem("golden_invoices", JSON.stringify(existingInvoices));
+
+        let saveStatus = "Booking/Invoice waa la keydiyay (Local Storage";
+
+        // 2. FIREBASE SAVE
+        try {
+          await addDoc(collection(db, "invoices"), {
+            ...data,
+            createdAt: serverTimestamp()
+          });
+          saveStatus += " & Firebase).";
+        } catch (fbErr) {
+          console.error("Error saving invoice to Firebase:", fbErr);
+          saveStatus += " - LAHAYN Firebase).";
+        }
+
+        // nadiifi foomka + summary marka la codeeyo
         form.reset();
         const cleared = collectFormData();
         summaryContent.innerHTML = buildSummary(cleared);
-        successMsg.textContent = "Booking/Booking waa la keydiyay (Firebase).";
+
+        successMsg.textContent = saveStatus;
         successMsg.classList.add("visible");
+
       } catch (err) {
-        console.error("Error saving Booking to Firestore", err);
-        successMsg.textContent = "Save ma shaqeyn (Firebase).";
+        console.error("Error saving invoice:", err);
+        successMsg.textContent = "Save ma shaqeyn (Local/Firebase).";
         successMsg.classList.add("visible");
       }
     });
@@ -1031,11 +1059,5 @@
     });
   </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
