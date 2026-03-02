@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="so">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Golden Coffee - Local Customer View</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at bottom right, #d4a63f 0%, #3c3315 55%, #2b250f 100%);
+        }
+
+        .wrapper {
+            background: #181309;
+            color: #f5e9c8;
+            width: 100%;
+            max-width: 1040px;
+            border-radius: 20px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(212, 166, 63, 0.35);
+            padding: 24px 26px 26px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #fff3c4 0%, #d39b2f 35%, #8b6a1f 70%, #3a2d11 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-text h1 {
+            font-size: 1.1rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #f8e5a2;
+        }
+
+        .brand-text p {
+            font-size: 0.75rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #d1b26a;
+            margin-top: 1px;
+        }
+
+        .title {
+            text-align: right;
+        }
+
+        .title h2 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #f5e5b5;
+        }
+
+        .title span {
+            display: block;
+            font-size: 0.78rem;
+            color: #c7b181;
+            margin-top: 2px;
+        }
+
+        .card {
+            margin-top: 10px;
+            background: radial-gradient(circle at top left, #33270f 0%, #181309 55%);
+            border-radius: 16px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(212, 166, 63, 0.35);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 0.8rem;
+            color: #f6e2a2;
+        }
+
+        .card-subtitle {
+            font-size: 0.75rem;
+            color: #c0ac7a;
+        }
+
+        .pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(244, 215, 120, 0.6);
+            font-size: 0.7rem;
+            color: #f4d778;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .table-wrapper {
+            margin-top: 4px;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid rgba(117, 85, 32, 0.7);
+            background: rgba(13, 9, 3, 0.9);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+        }
+
+        thead {
+            background: linear-gradient(135deg, rgba(214, 168, 88, 0.22), rgba(73, 50, 16, 0.7));
+        }
+
+        th,
+        td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(68, 47, 15, 0.85);
+            white-space: nowrap;
+        }
+
+        th {
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.7rem;
+            color: #f9e9bf;
+        }
+
+        td {
+            color: #f6e5c4;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: rgba(24, 17, 6, 0.9);
+        }
+
+        tbody tr:nth-child(even) {
+            background: rgba(18, 13, 5, 0.95);
+        }
+
+        tbody tr:hover {
+            background: rgba(222, 178, 94, 0.26);
+        }
+
+        .action-btn {
+            background: #33270f;
+            border: 1px solid #d4a63f;
+            color: #f5e9c8;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 4px;
+            font-size: 0.7rem;
+        }
+
+        .action-btn.delete {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+
+        #editModal input {
+            width: 100%;
+            background: #2b250f;
+            border: 1px solid #d4a63f;
+            color: #f5e9c8;
+            padding: 6px;
+            border-radius: 4px;
+            padding-top: 4px;
+        }
+
+        .footer {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #a8925e;
+        }
+
+        .back-link {
+            color: #f4d778;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(244, 215, 120, 0.6);
+        }
+
+        /* Print Specific Styles */
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                min-height: auto;
+                padding: 0;
+            }
+
+            .wrapper {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                max-width: none;
+                background: transparent;
+            }
+
+            .header,
+            .footer,
+            .card-header,
+            .action-btn,
+            th:last-child,
+            td:last-child,
+            th:first-child,
+            td:first-child.select-cell {
+                display: none !important;
+            }
+
+            /* Show only rows that have the print-visible class if printing specific */
+            .table-wrapper {
+                border: none;
+                background: transparent;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                color: #000;
+                border: 1px solid #ccc;
+            }
+
+            thead {
+                background: transparent !important;
+            }
+
+            tbody tr {
+                background: transparent !important;
+            }
+
+            /* Hide all rows by default during print if making selections */
+            .print-mode tbody tr {
+                display: none;
+            }
+
+            /* Show only selected ones */
+            .print-mode tbody tr.print-selected {
+                display: table-row;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="brand">
+                <div class="brand-logo">
+                    <img src="logo.jpeg" alt="Golden Coffee and Halls logo" />
+                </div>
+                <div class="brand-text">
+                    <h1>GOLDEN</h1>
+                    <p>Coffee and Halls</p>
+                </div>
+            </div>
+            <div class="title">
+                <h2>Local Customer View</h2>
+                <span>Showing saved records from local browser storage</span>
+            </div>
+        </header>
+
+        <section class="card">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">Local Customers list</div>
+                    <div class="card-subtitle">Xogta laga akhristay <code>Local Storage</code></div>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button class="action-btn" id="printSelectedBtn"
+                        style="background:#557A46; color:#fff; border-color:#557A46;">Print Selected</button>
+                    <span class="pill" id="countPill">0 customers</span>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:30px;"><input type="checkbox" id="selectAllCb" /></th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Degmada</th>
+                            <th>Date</th>
+                            <th>No Of People</th>
+                            <th>Amount</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customersBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer">
+                <span>Marka aad wax kaydiso (Save), halkan bay offline ahaan usoo dhaceysaa.</span>
+                <a href="index.html" class="back-link">← Back to Booking</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+        <div
+            style="background:#181309; border:1px solid #d4a63f; padding:20px; border-radius:12px; width:400px; max-width:90%; color:#f5e9c8; display:flex; flex-direction:column; gap:10px;">
+            <h3>Edit Booking</h3>
+            <input type="hidden" id="editIndex" />
+            <label>Name: <input type="text" id="editName" /></label>
+            <label>Phone: <input type="text" id="editPhone" /></label>
+            <label>District: <input type="text" id="editDistrict" /></label>
+            <label>Date: <input type="date" id="editDate" /></label>
+            <label>No Of People: <input type="number" id="editQty" /></label>
+            <label>Amount: <input type="number" id="editAmount" /></label>
+            <label>Paid: <input type="number" id="editPaid" /></label>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:10px;">
+                <button id="cancelEditBtn"
+                    style="background:#444; color:white; padding:6px 14px; border:none; border-radius:4px; cursor:pointer;">Cancel</button>
+                <button id="saveEditBtn"
+                    style="background:#d39b2f; color:#181309; padding:6px 14px; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="customer-view-local.js"></script>
+</body>
+
+</html>
