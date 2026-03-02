@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+  <meta charset="UTF-8" />
+  <title>Golden Coffee and Halls - Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at bottom right, #d4a63f 0%, #3c3315 55%, #2b250f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .booking-wrapper {
+      background: #181309;
+      color: #f5e9c8;
+      max-width: 960px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.7);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      overflow: hidden;
+      border: 1px solid rgba(212, 166, 63, 0.35);
+    }
+
+    @media (max-width: 820px) {
+      .booking-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* LEFT SIDE - FORM */
+
+    .booking-form {
+      padding: 28px 32px 32px;
+      background: radial-gradient(circle at top left, #33270f 0%, #181309 55%);
+    }
+
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff3c4 0%, #d39b2f 35%, #8b6a1f 70%, #3a2d11 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .brand-text h1 {
+      font-size: 1.35rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f8e5a2;
+    }
+
+    .brand-text p {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #d1b26a;
+      margin-top: 2px;
+    }
+
+    .title {
+      margin: 6px 0 18px;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f5e5b5;
+    }
+
+    .subtitle {
+      font-size: 0.87rem;
+      color: #c5b083;
+      margin-bottom: 18px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 18px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 640px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.85rem;
+    }
+
+    .field label {
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #d7c187;
+      font-size: 0.74rem;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: rgba(14, 10, 4, 0.85);
+      border-radius: 999px;
+      border: 1px solid rgba(212, 166, 63, 0.45);
+      padding: 9px 13px;
+      color: #f8e9c4;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .field textarea {
+      border-radius: 16px;
+      resize: vertical;
+      min-height: 68px;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(247, 232, 188, 0.55);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #f0c85a;
+      box-shadow: 0 0 0 1px rgba(240, 200, 90, 0.4);
+      background: rgba(17, 12, 4, 0.98);
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    .inline-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .radio-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 166, 63, 0.5);
+      font-size: 0.78rem;
+      cursor: pointer;
+      user-select: none;
+      color: #f5e1a5;
+      background: rgba(18, 13, 6, 0.8);
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .radio-pill:hover {
+      transform: translateY(-1px);
+      border-color: #f3c45c;
+    }
+
+    .radio-pill input {
+      display: none;
+    }
+
+    .radio-pill span.bullet {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      border: 2px solid #f3c45c;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio-pill span.bullet::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: #f3c45c;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .radio-pill input:checked + span.bullet::after {
+      opacity: 1;
+    }
+
+    .radio-pill input:checked ~ span.text {
+      color: #1a1208;
+    }
+
+    .radio-pill input:checked ~ span.bullet {
+      background: #f3c45c;
+      border-color: #f3c45c;
+    }
+
+    .radio-pill input:checked ~ span.text-pill-bg {
+      position: absolute;
+      inset: -1px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f5d76b, #c68b25);
+      z-index: -1;
+    }
+
+    .note {
+      font-size: 0.78rem;
+      color: #a89466;
+      margin-bottom: 18px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      border: none;
+      cursor: pointer;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f6d670, #c98921);
+      color: #2b210f;
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      filter: brightness(1.04);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+      filter: brightness(0.97);
+    }
+
+    .btn-primary span.icon {
+      font-size: 1.1rem;
+      line-height: 0;
+    }
+
+    .small-hint {
+      font-size: 0.78rem;
+      color: #9f8a5f;
+    }
+
+    .success {
+      margin-top: 14px;
+      font-size: 0.84rem;
+      color: #93e28f;
+      display: none;
+    }
+
+    .success.visible {
+      display: block;
+    }
+
+    /* BOOKINGS LIST (kaydin dadka) */
+    .bookings-panel {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 120px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(251, 239, 209, 0.96);
+      box-shadow: 0 10px 20px rgba(71, 45, 10, 0.45);
+      font-size: 0.75rem;
+      color: #3b280f;
+      max-height: 180px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bookings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bookings-title {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      color: #7b5218;
+    }
+
+    .bookings-count {
+      font-size: 0.7rem;
+      color: #9c6b20;
+    }
+
+    .bookings-table-wrap {
+      margin-top: 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(190, 152, 83, 0.6);
+      overflow: auto;
+      background: #fff8e5;
+    }
+
+    table.bookings-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+      min-width: 100%;
+    }
+
+    .bookings-table thead {
+      background: #f1ddae;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .bookings-table th,
+    .bookings-table td {
+      padding: 4px 6px;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(216, 185, 120, 0.7);
+    }
+
+    .bookings-table th {
+      text-align: left;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.68rem;
+      color: #82551a;
+    }
+
+    .bookings-table tbody tr:nth-child(even) {
+      background: #fff2cf;
+    }
+
+    .bookings-empty {
+      font-size: 0.72rem;
+      color: #a2782e;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 820px) {
+      .bookings-panel {
+        position: static;
+        margin: 12px 0 72px;
+      }
+
+      .signature-area {
+        position: static;
+        margin-top: 6px;
+      }
+    }
+
+    /* RIGHT SIDE - STAMP & SUMMARY */
+
+    .booking-side {
+      background: radial-gradient(circle at top right, #f2c85c 0%, #a36c1b 34%, #3b2a0d 76%);
+      position: relative;
+      padding: 26px 26px 30px;
+      color: #2e210d;
+    }
+
+    .booking-side::before {
+      content: "";
+      position: absolute;
+      inset: 20px 18px 24px 40%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 248, 220, 0.38);
+      border-left: none;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+
+    .side-header {
+      text-align: right;
+      margin-bottom: 22px;
+    }
+
+    .side-header h2 {
+      font-size: 0.92rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fdf3d3;
+    }
+
+    .side-header p {
+      font-size: 0.78rem;
+      color: #f0dfb3;
+      margin-top: 3px;
+    }
+
+    /* SIGNATURE + STAMP AREA */
+
+    .signature-area {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 28px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+ 
+   
+    /* GOLDEN STAMP */
+
+    .golden-stamp {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      position: relative;
+      background: radial-gradient(circle at 30% 20%, #fffadd 0%, #f7d973 30%, #c88b22 60%, #7e5414 100%);
+      box-shadow:
+        0 0 0 2px rgba(255, 252, 235, 0.7),
+        0 0 0 6px rgba(112, 70, 10, 0.7),
+        0 20px 30px rgba(40, 24, 5, 0.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .golden-stamp::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px dashed rgba(109, 63, 9, 0.7);
+    }
+
+    .stamp-inner {
+      position: relative;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fff6cf 0%, #f3c95e 40%, #c27f1f 75%, #6e410f 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 205, 0.8);
+    }
+
+    .stamp-inner img {
+      width: 92%;
+      height: 92%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 52%;
+      filter: drop-shadow(0 2px 2px rgba(120, 68, 7, 0.45));
+    }
+
+    .stamp-name {
+      position: absolute;
+      bottom: 6px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.23em;
+      color: #5b3608;
+    }
+
+    .stamp-ring-text {
+      position: absolute;
+      inset: 4px;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stamp-ring-text svg {
+      width: 110%;
+      height: 110%;
+      transform: rotate(-18deg);
+    }
+
+    .stamp-ring-text text {
+      font-size: 7px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      fill: rgba(60, 35, 7, 0.96);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    /* BOOKING SUMMARY SMALL BOX */
+
+    .summary-card {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      top: 78px;
+      padding: 14px 16px 12px;
+      border-radius: 14px;
+      background: rgba(249, 236, 202, 0.96);
+      box-shadow: 0 16px 28px rgba(71, 45, 10, 0.55);
+      backdrop-filter: blur(12px);
+      color: #3b280f;
+      font-size: 0.8rem;
+    }
+
+    .summary-title {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.74rem;
+      color: #785218;
+      margin-bottom: 4px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 3px;
+    }
+
+    .summary-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      color: #8a6321;
+    }
+
+    .summary-value {
+      font-weight: 600;
+      color: #2c1a07;
+    }
+
+    .summary-empty {
+      font-size: 0.74rem;
+      color: #9d7a3b;
+      margin-top: 6px;
+    }
+
+    /* Print styles: ha muujin buttons, stamp waa inuu PDF ka muuqdaa */
+    @media print {
+      html, body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        height: 100% !important;
+      }
+
+      .actions {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+      }
+      .booking-wrapper {
+        box-shadow: none !important;
+        border: none !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .booking-form,
+      .booking-side {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      /* Signature + Stamp + midabyada waa inay PDF da muuqdaan */
+      .signature-area,
+      .signature-line,
+      .booking-side,
+      .golden-stamp,
+      .golden-stamp::before,
+      .stamp-inner,
+      .stamp-inner img,
+      .summary-card,
+      .brand-logo,
+      .brand-logo img {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      
+
+      .golden-stamp {
+        background: radial-gradient(circle at 30% 20%, #fffadd 0%, #f7d973 30%, #c88b22 60%, #7e5414 100%) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .stamp-inner {
+        background: radial-gradient(circle at 90% 20%, #fff6cf 0%, #f3c95e 40%, #c27f1f 75%, #6e410f 100%) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* Stamp-inner + logo: waa inay PDF ka muuqdaan marka la save gareeyo */
+      .signature-area {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      .stamp-inner {
+        display: flex !important;
+        visibility: visible !important;
+      }
+      .stamp-inner img {
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: block !important;
+        width: 92% !important;
+        height: auto !important;
+        max-width: 68px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="booking-wrapper">
+    <!-- LEFT / FORM -->
+    <section class="booking-form">
+      <header class="brand-header">
+        <div class="brand-logo">
+          <img src="logo.jpeg" alt="Golden Coffee and Halls logo">
+        </div>
+        <div class="brand-text">
+          <h1>GOLDEN</h1>
+          <p>Coffee and Halls</p>
+        </div>
+      </header>
+
+      <h2 class="title">Golden Coffee Invoice</h2>
+     
+
+      <form id="bookingForm" autocomplete="off">
+        <div class="field">
+          <label for="fullName">Name</label>
+          <input id="fullName" name="fullName" type="text" placeholder="Tusaale: Maxamed Cali" required />
+        </div>
+
+        <div class="field">
+          <label for="district">Degmada (District)</label>
+          <input id="district" name="district" type="text" placeholder="Tusaale: Hodan" />
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="Tusaale: 0612345678" />
+        </div>
+
+        <div class="field">
+          <label for="date">Date</label>
+          <input id="date" name="date" type="date" required />
+        </div>
+
+        <div class="field">
+          <label for="qty">Qty</label>
+          <input id="qty" name="qty" type="number" min="1" placeholder="Tusaale: 2" required />
+        </div>
+
+        <div class="field">
+          <label for="amount">Amount</label>
+          <input id="amount" name="amount" type="number" min="0" step="0.01" placeholder="Tusaale: 5.00" required />
+        </div>
+
+        <div class="field field-full">
+          <label for="totalAmount">Total amount</label>
+          <input id="totalAmount" name="totalAmount" type="number" min="0" step="0.01" placeholder="Si toos ah" readonly />
+        </div>
+
+        <div class="field">
+          <label for="paid">Paid</label>
+          <input id="paid" name="paid" type="number" min="0" step="0.01" placeholder="Lacag bixisay" />
+        </div>
+
+        <div class="field">
+          <label for="reset">Balance</label>
+          <input id="reset" name="reset" type="number" min="0" step="0.01" placeholder="Haraaga" readonly />
+        </div>
+      </form>
+
+      <div class="actions">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <button class="btn-primary" type="button" id="submitBtn">
+            <span class="icon">✶</span>
+            <span>Confirm Booking</span>
+          </button>
+          <button class="btn-primary" type="button" id="printBtn" style="background:linear-gradient(135deg,#f1f5ff,#c0d0ff);color:#1e293b;">
+            <span>Print / PDF</span>
+          </button>
+          <button class="btn-primary" type="button" id="resetAllBtn" style="background:transparent;border:1px solid rgba(246,214,112,0.7);color:#f6d670;box-shadow:none;">
+            <span>Reset All</span>
+          </button>
+        </div>
+       
+      </div>
+
+      <p id="successMsg" class="success">
+        Booking‑ga waa la diiwaan geliyay (browser‑ka oo kaliya). Waxaad arki kartaa dulmar dhinaca midig.
+      </p>
+    </section>
+
+    <!-- RIGHT / STAMP + SUMMARY -->
+    <section class="booking-side">
+      <div class="side-header">
+        <h2>Golden Coffee and Halls</h2>
+        <p>Premium events • Signature coffee • Mogadishu</p>
+      </div>
+
+      <!-- Summary card -->
+      <article class="summary-card" id="summaryCard">
+        <div class="summary-title">Invoice summary</div>
+        <div id="summaryContent">
+          <p class="summary-empty">
+            Buuxi foomka bidix si dulmar invoice u muuqdo halkan.
+          </p>
+        </div>
+      </article>
+
+      <!-- Signature + Stamp -->
+      <div class="signature-area">
+        <div class="signature-line">
+          
+        </div>
+
+        <div class="golden-stamp">
+          <div class="stamp-ring-text">
+            <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+              <defs>
+                <path id="goldenCircleTextPath" d="M 50,50 m -34,0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" />
+              </defs>
+              <text>
+                <textPath href="#goldenCircleTextPath" startOffset="0%" text-anchor="start">
+                  ✶&#160;Golden&#160;Coffee&#160;&#160;&#160;Golden&#160;Coffee&#160;✶
+                </textPath>
+              </text>
+            </svg>
+          </div>
+          <div class="stamp-inner">
+            <img src="logo.jpeg" alt="Golden logo icon" loading="eager" width="68" height="68">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDcWvwmC9aNQ6ey4I0rNsMNI6sk8SLnQY0",
+      authDomain: "golden-fe9ce.firebaseapp.com",
+      projectId: "golden-fe9ce",
+      storageBucket: "golden-fe9ce.firebasestorage.app",
+      messagingSenderId: "801196467125",
+      appId: "1:801196467125:web:3c1c1fb33404eb5a0f6ffc",
+      measurementId: "G-N9F1GFPYGZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    function buildSummary(data) {
+      if (!data.fullName && !data.date && !data.qty && !data.totalAmount && !data.paid && !data.reset && !data.district && !data.phone) {
+        return '<p class="summary-empty">Buuxi foomka bidix si dulmar invoice u muuqdo halkan.</p>';
+      }
+
+      return `
+        <div class="summary-row">
+          <span class="summary-label">Name</span>
+          <span class="summary-value">${data.fullName || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Degmada</span>
+          <span class="summary-value">${data.district || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Phone</span>
+          <span class="summary-value">${data.phone || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Date</span>
+          <span class="summary-value">${data.date || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Qty</span>
+          <span class="summary-value">${data.qty || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Amount</span>
+          <span class="summary-value">${data.amount || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Total</span>
+          <span class="summary-value">${data.totalAmount || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Paid</span>
+          <span class="summary-value">${data.paid || "-"}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Balance</span>
+          <span class="summary-value">${data.reset || "-"}</span>
+        </div>
+      `;
+    }
+
+    const form = document.getElementById("bookingForm");
+    const summaryContent = document.getElementById("summaryContent");
+    const successMsg = document.getElementById("successMsg");
+    const submitBtn = document.getElementById("submitBtn");
+    const printBtn = document.getElementById("printBtn");
+    const resetAllBtn = document.getElementById("resetAllBtn");
+
+    function collectFormData() {
+      const formData = new FormData(form);
+
+      const qtyRaw = formData.get("qty")?.toString() || "0";
+      const amountRaw = formData.get("amount")?.toString() || "0";
+      const paidRaw = formData.get("paid")?.toString() || "0";
+      const qty = Number(qtyRaw) || 0;
+      const amount = Number(amountRaw) || 0;
+      const paid = Number(paidRaw) || 0;
+      const totalAmount = qty * amount;
+      const reset = Math.max(totalAmount - paid, 0);
+
+      // ku qor total-ka input-ka readonly ah
+      const totalInput = document.getElementById("totalAmount");
+      if (totalInput) {
+        totalInput.value = totalAmount ? totalAmount.toFixed(2) : "";
+      }
+
+      const resetInput = document.getElementById("reset");
+      if (resetInput) {
+        resetInput.value = reset ? reset.toFixed(2) : "";
+      }
+
+      return {
+        fullName: formData.get("fullName")?.toString().trim(),
+        district: formData.get("district")?.toString().trim() || "",
+        phone: formData.get("phone")?.toString().trim() || "",
+        date: formData.get("date")?.toString(),
+        qty: qty ? String(qty) : "",
+        amount: amount ? amount.toFixed(2) : "",
+        totalAmount: totalAmount ? totalAmount.toFixed(2) : "",
+        paid: paid ? paid.toFixed(2) : "",
+        reset: reset ? reset.toFixed(2) : ""
+      };
+    }
+
+    // Live summary update
+    form.addEventListener("input", () => {
+      const data = collectFormData();
+      summaryContent.innerHTML = buildSummary(data);
+      successMsg.classList.remove("visible");
+    });
+
+    submitBtn.addEventListener("click", async () => {
+      if (!form.reportValidity()) return;
+
+      const data = collectFormData();
+
+      try {
+        await addDoc(collection(db, "invoices"), {
+          ...data,
+          createdAt: serverTimestamp()
+        });
+
+        // nadiifi foomka + summary marka Firebase save-gu uu guuleysto
+        form.reset();
+        const cleared = collectFormData();
+        summaryContent.innerHTML = buildSummary(cleared);
+        successMsg.textContent = "Booking/Invoice waa la keydiyay (Firebase).";
+        successMsg.classList.add("visible");
+      } catch (err) {
+        console.error("Error saving invoice to Firestore", err);
+        successMsg.textContent = "Save ma shaqeyn (Firebase).";
+        successMsg.classList.add("visible");
+      }
+    });
+
+    // Print: daabac ama Save as PDF – stamp-inner waa inuu PDF ka muuqdaa
+    printBtn.addEventListener("click", () => {
+      const stampImg = document.querySelector(".stamp-inner img");
+      const doPrint = () => {
+        // Reflow si PDF uu render gareeyo stamp oo dhan
+        document.body.offsetHeight;
+        window.print();
+      };
+      if (stampImg && (!stampImg.complete || !stampImg.naturalWidth)) {
+        stampImg.addEventListener("load", () => setTimeout(doPrint, 50), { once: true });
+        stampImg.addEventListener("error", doPrint, { once: true });
+      } else {
+        setTimeout(doPrint, 50);
+      }
+    });
+
+    // Reset All: nadiifi dhammaan box‑yada + summary + fariinta
+    resetAllBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // si cad u nadiifi dhammaan box‑yada
+      const inputs = ["fullName", "district", "phone", "date", "qty", "amount", "paid", "totalAmount", "reset"];
+      inputs.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+      });
+
+      form.reset();
+
+      const cleared = {
+        fullName: "",
+        district: "",
+        phone: "",
+        date: "",
+        qty: "",
+        amount: "",
+        totalAmount: "",
+        paid: "",
+        reset: ""
+      };
+
+      summaryContent.innerHTML = buildSummary(cleared);
+      successMsg.classList.remove("visible");
+    });
+  </script>
+</body>
+</html>
