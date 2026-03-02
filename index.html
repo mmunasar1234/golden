@@ -590,10 +590,21 @@
 
     /* Print styles: ha muujin buttons, stamp waa inuu PDF ka muuqdaa */
     @media print {
+      @page {
+        size: auto;
+        margin: 8mm;
+      }
+
       html, body {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
-        height: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
       }
 
       .actions {
@@ -607,6 +618,8 @@
         border: none !important;
         page-break-inside: avoid !important;
         break-inside: avoid !important;
+        max-width: 100% !important;
+        width: 100% !important;
       }
       .booking-form,
       .booking-side {
@@ -659,6 +672,47 @@
         width: 92% !important;
         height: auto !important;
         max-width: 68px !important;
+      }
+    }
+
+    /* Mobile: PDF fit marka mobile laga save gareeyo */
+    @media print and (max-width: 640px) {
+      @page {
+        margin: 6mm;
+      }
+      .booking-wrapper {
+        padding: 0 !important;
+      }
+      .booking-form {
+        padding: 16px 20px 20px !important;
+      }
+      .booking-side {
+        padding: 16px 20px 24px !important;
+      }
+      .brand-text h1 {
+        font-size: 1.1rem !important;
+      }
+      .title {
+        font-size: 0.95rem !important;
+        margin-bottom: 12px !important;
+      }
+      form {
+        gap: 10px 14px !important;
+      }
+      .summary-card {
+        padding: 10px 12px !important;
+        font-size: 0.75rem !important;
+      }
+      .golden-stamp {
+        width: 96px !important;
+        height: 96px !important;
+      }
+      .stamp-inner {
+        width: 58px !important;
+        height: 58px !important;
+      }
+      .stamp-inner img {
+        max-width: 52px !important;
       }
     }
   </style>
